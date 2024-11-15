@@ -1,4 +1,5 @@
 import graphviz
+from PIL import Image
 import json
 
 class Utils:
@@ -44,15 +45,32 @@ class Utils:
         return all_paths
 
     @staticmethod
-    def create_graphviz(paths, filename="knight_paths.dot"):
-        """Create a Graphviz DOT file for visualizing paths."""
-        dot = graphviz.Digraph(comment="Knight's Shortest Paths")
+    # def create_graphviz(paths, filename="knight_paths.dot"):
+    #     """Create a Graphviz DOT file for visualizing paths."""
+    #     dot = graphviz.Digraph(comment="Knight's Shortest Paths")
         
+    #     # Add edges for each path
+    #     for path in paths:
+    #         for i in range(len(path) - 1):
+    #             dot.edge(str(path[i]), str(path[i + 1]))
+        
+    #     # Save to a DOT file
+    #     dot.render(filename, format="dot", cleanup=True)
+    #     print(f"DOT file saved as {filename}")
+
+
+    def create_graphviz(paths, filename="output/knight_paths"):
+        """Create a Graphviz graph and export it in multiple formats."""
+
+        dot = graphviz.Digraph(comment="Knight's Shortest Paths", format="pdf")
+
         # Add edges for each path
         for path in paths:
             for i in range(len(path) - 1):
-                dot.edge(str(path[i]), str(path[i + 1]))
-        
-        # Save to a DOT file
-        dot.render(filename, format="dot", cleanup=True)
-        print(f"DOT file saved as {filename}")
+                dot.edge(str(path[i]), str(path[i + 1]), arrowhead="vee")
+
+        # Render as PNG
+        dot.render(filename, format="png", cleanup=True)
+        print(f"Graph saved as {filename}.png")
+
+        print(f"Graph saved as {filename}.jpg")

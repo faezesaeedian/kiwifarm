@@ -17,3 +17,11 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 # Set the default command
 CMD ["python", "main.py"]
+
+#docker build -t knight-problem .     craete the image
+#docker run --rm --name knight-container -v $(pwd)/output:/app/output knight-problem python main.py "0 0" "7 7"
+
+
+
+
+
