@@ -2,6 +2,7 @@ import graphviz
 import json
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 class Utils:
     
@@ -15,31 +16,47 @@ class Utils:
         """Check if a position is within the chessboard boundaries."""
         return 0 <= x < 8 and 0 <= y < 8
     
-    def plot_knight_paths(paths):
+    def plot_knight_paths(self, paths):
+        # Ensure the output directory exists
+        output_dir = "output/"
+        os.makedirs(output_dir, exist_ok=True)
+
         for idx, path in enumerate(paths):
             # Create an 8x8 grid
             board = np.zeros((8, 8))
 
-            # Mark each move on the board with an arrow
+            # Create the figure
             plt.figure(figsize=(6, 6))
             plt.imshow(board, cmap="gray", extent=(0, 8, 0, 8))
             plt.gca().invert_yaxis()
 
+            # Plot the path with arrows
             for i in range(len(path) - 1):
                 start = path[i]
                 end = path[i + 1]
                 plt.plot([start[1] + 0.5, end[1] + 0.5], [start[0] + 0.5, end[0] + 0.5],
-                            marker="o", color="blue", linestyle="-", linewidth=2)
+                        marker="o", color="blue", linestyle="-", linewidth=2)
 
             # Add labels for each position
             for pos in path:
                 plt.text(pos[1] + 0.3, pos[0] + 0.7, f"{pos}", color="red", fontsize=12)
 
+            # Add title and grid
             plt.title(f"Path {idx + 1}")
             plt.grid(True)
             plt.xticks(range(9))
             plt.yticks(range(9))
-            plt.show()
+
+            # Save the figure to the output directory
+            filename = os.path.join(output_dir, f"knight_path_{idx + 1}.png")
+            try:
+                plt.savefig(filename)
+                print(f"Figure saved: {filename}")
+            except Exception as e:
+                print(f"Error saving figure {filename}: {e}")
+            finally:
+                plt.close()  # Close the figure to free memory
+
 
     def bfs_knight_paths(self, start, end):
         """Find all minimum-length paths for a knight to move from start to end."""
@@ -72,21 +89,7 @@ class Utils:
         return all_paths
 
     @staticmethod
-    # def create_graphviz(paths, filename="knight_paths.dot"):
-    #     """Create a Graphviz DOT file for visualizing paths."""
-    #     dot = graphviz.Digraph(comment="Knight's Shortest Paths")
-        
-    #     # Add edges for each path
-    #     for path in paths:
-    #         for i in range(len(path) - 1):
-    #             dot.edge(str(path[i]), str(path[i + 1]))
-        
-    #     # Save to a DOT file
-    #     dot.render(filename, format="dot", cleanup=True)
-    #     print(f"DOT file saved as {filename}")
-
-
-    def create_graphviz(paths, filename="output/knight_paths"):
+    def create_graphviz(paths, filename="output/knight_graph"):
         """Create a Graphviz graph and export it in multiple formats."""
 
         dot = graphviz.Digraph(comment="Knight's Shortest Paths", format="pdf")
@@ -100,4 +103,3 @@ class Utils:
         dot.render(filename, format="png", cleanup=True)
         print(f"Graph saved as {filename}.png")
 
-        print(f"Graph saved as {filename}.jpg")

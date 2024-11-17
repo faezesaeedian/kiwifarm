@@ -20,7 +20,6 @@ def main():
         # Find all shortest paths
         all_paths = utils.bfs_knight_paths(start, end)
         utils.plot_knight_paths(all_paths)
-        
         print("\nAll shortest paths:")
         for path in all_paths:
             print(path)
