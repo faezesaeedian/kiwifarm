@@ -1,6 +1,6 @@
 # About the Project
 
-This project is a chess-based utility for calculating all possible shortest paths for a knight's movement from a given start to an end position on the chessboard. The implementation includes features for pathfinding, visualization, and extensibility.
+This project is a chess-based utility for calculating all possible shortest paths for a knight's movement from a given start to an end position on the chessboard. The implementation includes features for pathfinding and visualization.
 
 ## Key Features
 
@@ -11,7 +11,7 @@ This project is a chess-based utility for calculating all possible shortest path
      - Generating a Graphviz graph to represent the connections between moves.
 
 2. **Input Validation**:
-   - The program ensures that user inputs are in the correct format (e.g., algebraic chess notation like `h4`) and within the valid range of the chessboard.
+   - The program ensures that user inputs are in the correct format (e.g., like ` 4 5`) and within the valid range of the chessboard.
    - If invalid input is detected, the program prompts the user to modify their input and provides clear feedback on the issue.
 
 3. **Config File**:
@@ -29,8 +29,6 @@ This project is a chess-based utility for calculating all possible shortest path
 6. **Dockerized for Portability**:
    - The codebase is fully dockerized to enable easy deployment and execution across different environments without dependency issues.
 
----
-
 ## How to Run
 
 ### Local Execution
@@ -45,12 +43,5 @@ This project is a chess-based utility for calculating all possible shortest path
    ```
 
    - Replace `"0 0"` and `"7 7"` with any valid start and end positions in algebraic notation (e.g., `h4`, `c7`).
-
-### Command-Line Parameters
-- The script accepts start and end positions as command-line arguments:
-  ```bash
-  python main.py h4 c7
-  ```
-- Positions are validated for correctness and range before processing.
 
 This project demonstrates a modular and extensible approach to solving the knight’s pathfinding problem, with flexibility for further development and real-world applicability.
