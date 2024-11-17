@@ -42,6 +42,6 @@ This project is a chess-based utility for calculating all possible shortest path
    docker run --rm --name knight-container -v $(pwd)/output:/app/output knight-problem python main.py "0 0" "7 7"
    ```
 
-   - Replace `"0 0"` and `"7 7"` with any valid start and end positions in algebraic notation (e.g., `h4`, `c7`).
+   - Replace `"0 0"` and `"7 7"` with any valid start and end positions.
 
 This project demonstrates a modular and extensible approach to solving the knight’s pathfinding problem, with flexibility for further development and real-world applicability.
