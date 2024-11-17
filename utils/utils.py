@@ -1,6 +1,7 @@
 import graphviz
-from PIL import Image
 import json
+import matplotlib.pyplot as plt
+import numpy as np
 
 class Utils:
     
@@ -13,6 +14,32 @@ class Utils:
     def is_within_bounds(x, y):
         """Check if a position is within the chessboard boundaries."""
         return 0 <= x < 8 and 0 <= y < 8
+    
+    def plot_knight_paths(paths):
+        for idx, path in enumerate(paths):
+            # Create an 8x8 grid
+            board = np.zeros((8, 8))
+
+            # Mark each move on the board with an arrow
+            plt.figure(figsize=(6, 6))
+            plt.imshow(board, cmap="gray", extent=(0, 8, 0, 8))
+            plt.gca().invert_yaxis()
+
+            for i in range(len(path) - 1):
+                start = path[i]
+                end = path[i + 1]
+                plt.plot([start[1] + 0.5, end[1] + 0.5], [start[0] + 0.5, end[0] + 0.5],
+                            marker="o", color="blue", linestyle="-", linewidth=2)
+
+            # Add labels for each position
+            for pos in path:
+                plt.text(pos[1] + 0.3, pos[0] + 0.7, f"{pos}", color="red", fontsize=12)
+
+            plt.title(f"Path {idx + 1}")
+            plt.grid(True)
+            plt.xticks(range(9))
+            plt.yticks(range(9))
+            plt.show()
 
     def bfs_knight_paths(self, start, end):
         """Find all minimum-length paths for a knight to move from start to end."""
