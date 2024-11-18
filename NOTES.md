@@ -54,6 +54,7 @@ try:
     end = tuple(map(int, args.end.split()))
 except ValueError:
     print("Invalid input. Please enter two integers separated by a space.")
+```
 
 ## 6. Config File (JSONC Format)
 
