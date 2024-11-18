@@ -17,7 +17,16 @@ class Utils:
 
     @staticmethod
     def is_within_bounds(x, y):
-        """Check if a position is within the chessboard boundaries."""
+        """
+        Check if a position is within the chessboard boundaries.
+
+        Args:
+            x (int): Row index.
+            y (int): Column index.
+
+        Returns:
+            bool: True if the position is within bounds, False otherwise.
+        """
         return 0 <= x < 8 and 0 <= y < 8
     
     def plot_knight_paths(self, paths):
