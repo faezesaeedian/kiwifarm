@@ -10,13 +10,9 @@ class Utils:
     def __init__(self) -> None:
         """Initialize the Utils class and load configuration from a file."""
         with open('config.jsonc', 'r') as config_file:
-            # Read the file content
             content = config_file.read()
-            # Remove single-line comments (//)
             content = re.sub(r'//.*', '', content)
-            # Remove multi-line comments (/* ... */)
             content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
-            # Parse the cleaned JSON content
             self.config = json.loads(content)
 
     @staticmethod
