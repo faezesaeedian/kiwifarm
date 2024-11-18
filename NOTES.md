@@ -33,15 +33,29 @@ A DOT graph is generated, showing the knight’s shortest paths.
 The project includes a Dockerfile for containerizing the application.
 Steps to Build and Run
 1. Build the Docker Image:
- ``
+ ```python
 docker build -t knight-problem .
 ```
 3. Run the Container:
-```
+```python
 docker run --rm --name knight-container -v $(pwd)/output:/app/output knight-problem python main.py "0 0" "7 7"
 ```
 - --rm: Automatically removes the container after it exits.
 - --name: Names the container for easy identification.
 - -v $(pwd)/output:/app/output: Mounts the local output/ directory to /app/output in the container, allowing output files to persist locally.
 
+## 5. Error/Exception Handling
+
+The project includes robust error handling:
+
+### Input Validation
+- Ensures that the start and end positions are valid integers.
+
+**Example**:
+```python
+try:
+    start = tuple(map(int, args.start.split()))
+    end = tuple(map(int, args.end.split()))
+except ValueError:
+    print("Invalid input. Please enter two integers separated by a space.")
 
