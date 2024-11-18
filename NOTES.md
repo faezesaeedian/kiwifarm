@@ -8,25 +8,44 @@ This document provides detailed notes and documentation for the project, includi
 ---
 
 ## **1. Algebraic (Chess) Notation**
-- The project uses algebraic notation for representing chess moves:
-  - Chessboard squares are labeled using columns (`a` to `h`) and rows (`1` to `8`).
-  - For example, `e4` represents the square at column `e` and row `4`.
-  - Knight moves are encoded as tuples like `(2, 1)` indicating relative moves.
+-  Board Representation: The chessboard is modeled as an 8x8 grid with positions represented as (x, y) tuples.
+-  Start and End Positions: Input positions are given as integers (e.g., 2 1 for row 2, column 1).
+-  Knight Moves: The knight’s possible moves are defined as relative tuples such as (2, 1), (2, -1), etc., loaded from the config.jsonc file.
 
 ---
 
 ## **2. Classes**
-- **`Knight` Class**:
-  - Represents the knight piece and its moves.
-  - Includes methods to calculate valid moves and paths.
-- **`ChessBoard` Class**:
-  - Models the chessboard and its constraints.
-  - Provides methods for validating positions and generating moves.
-- **`GraphGenerator` Class**:
-  - Generates the graph of knight moves using Graphviz.
-  - Exports `.dot` files for visualization.
-
+- **`Utils Class**:
+The main utility class that provides various methods to:
+- Load configurations from a JSONC file.
+- Validate positions on the chessboard.
+- Implement BFS (Breadth-First Search) to find the shortest paths for a knight from the start to the end position.
+- Visualize paths as images using Matplotlib.
+- Generate Graphviz .dot files to represent the knight’s movement graph.
 ---
+## **3. Extra Files**
+- Generated Images:
+Paths visualized as PNG images using Matplotlib are saved in the output/ directory (e.g., knight_path_1.png).
+- Graphviz Files:
+A DOT graph is generated (knight_graph.png), showing the knight’s shortest paths.
+
+## **4. Docker Usage**
+The project includes a Dockerfile for containerizing the application.
+Steps to Build and Run
+1. Build the Docker Image:
+ ``python
+docker build -t knight-problem .
+```
+3. Run the Container:
+```python
+docker run --rm --name knight-container -v $(pwd)/output:/app/output knight-problem python main.py "0 0" "7 7"
+```
+- --rm: Automatically removes the container after it exits.
+- --name: Names the container for easy identification.
+- -v $(pwd)/output:/app/output: Mounts the local output/ directory to /app/output in the container, allowing output files to persist locally.
+
+
+
 
 ## **3. Code Documentation**
 - The code is documented using Python docstrings and inline comments.
