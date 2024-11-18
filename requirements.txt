@@ -1,3 +1,4 @@
 graphviz
 flask
 matplotlib
+regex

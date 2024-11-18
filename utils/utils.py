@@ -3,13 +3,21 @@ import json
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import re
 
 class Utils:
     
     def __init__(self) -> None:
         """Initialize the Utils class and load configuration from a file."""
-        with open('config.json', 'r') as config_file:
-            self.config = json.load(config_file)
+        with open('config.jsonc', 'r') as config_file:
+            # Read the file content
+            content = config_file.read()
+            # Remove single-line comments (//)
+            content = re.sub(r'//.*', '', content)
+            # Remove multi-line comments (/* ... */)
+            content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
+            # Parse the cleaned JSON content
+            self.config = json.loads(content)
 
     @staticmethod
     def is_within_bounds(x, y):
